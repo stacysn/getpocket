@@ -5,13 +5,19 @@ body {
 }
 
 .card-body {
-  background-color: #7E9181;
   width: 301px;
   padding-left: 12px;
   padding-right: 12px;
-  border-radius: 15px
+  border-radius: 15px;
+  padding: 1.25rem;
+  color: aliceblue;
 }
 
 .myList-body {
-  /*background-color: #82D4BB*/
+  background-color: #82D4BB
 }
+
+
+/*.card-body{
+  border: 5px solid rgba(0, 0, 0, 0.125);
+}*/
