@@ -7,7 +7,7 @@ class Article extends Component{
     return (
       <Row>
         <Col sm="6">
-          <Card body>
+          <Card body style={{backgroundColor: '#7E9181'}}>
             <CardTitle>{this.props.myArticle}</CardTitle>
             <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
             <Button>Add Tag</Button>
