@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import '../App.css';
 import { Button, FormGroup, Label, Input } from 'reactstrap';
 
-
-
-
 class Header extends Component {
-
   render() {
     return (
       <div className="App">
@@ -21,7 +17,7 @@ class Header extends Component {
               />
            </Label>
          </FormGroup>
-         <Button type="submit" onClick={(e) => this.props.addArticle(e)}> Add Article</Button>
+         <Button type="submit" style={{padding: '0.1rem'}} onClick={(e) => this.props.addArticle(e)}> Add Article</Button>
         </header>
       </div>
     )

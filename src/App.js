@@ -7,12 +7,17 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      myArticle : ['Apple Music Expands', 'Facebook has new Lists feature', 'Smartwatch for Kids'],
-      newArticle: ''
+      myArticle : ['Apple Music Expands', 'Facebook Has New Lists Feature', 'Smartwatch for Kids'],
+      newArticle: '',
+      addArticleToList: ''
     }
     this.addArticle = this.addArticle.bind(this);
+    // this.loadArticles = this.loadArticles.bind(this);
   }
 
+  // componentDidMount(){
+  //     this.loadArticles()
+  // }
 
   addArticle (e) {
     this.setState({
@@ -23,20 +28,14 @@ class App extends Component {
     )
     console.log("my Article", this.state.myArticle);
   }
-//
-  // addArticle = (e) => {
-  //   let newArticle = []
-  //   console.log("e", e);
-  //   for (let i = 0; i < e.length; i++){
-  //     newArticle.push(e)
-  //   }
-    // let currentState = this.state;
-    // currentState.chartData.datasets[0].data = sizeArr
-    // this.setState(
-    //   { chartData: update(this.state.chartData, {datasets: {data: {$set: sizeArr}}})
-    // })
 
-// }
+  // loadArticles() {
+  //   for (let i = 0; i < this.state.myArticle.length; i++){
+  //     this.setState({ addArticleToList: this.state.myArticle[i]});
+  //     console.log("myArticle", this.state.addArticleToList);
+  //   }
+  //   console.log("THIS IS ADD Article", this.state.addArticleToList);
+  // }
 
   render() {
     return (
