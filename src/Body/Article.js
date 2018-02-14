@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { Card, Row, Col, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button } from 'reactstrap';
+import { Card, Row, Col, CardText, CardTitle, Button } from 'reactstrap';
 
-class MyList extends Component{
-  constructor(props){
-    super(props)
-  }
+class Article extends Component{
+
   render(){
     return (
       <Row>
@@ -12,7 +10,7 @@ class MyList extends Component{
           <Card body>
             <CardTitle>{this.props.myArticle}</CardTitle>
             <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-            <Button>Go somewhere</Button>
+            <Button>Add Tag</Button>
           </Card>
         </Col>
       </Row>
@@ -20,4 +18,4 @@ class MyList extends Component{
   }
 }
 
-export default MyList;
+export default Article;

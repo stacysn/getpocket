@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Header from './Head/Header'
 import MyList from './Body/MyList'
@@ -12,10 +11,12 @@ class App extends Component {
     }
   }
 
+
+
   render() {
     return (
       <div>
-        <Header />
+        <Header/>
         <MyList myArticle={this.state.myArticle}/>
       </div>
     );
