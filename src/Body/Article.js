@@ -19,3 +19,10 @@ class Article extends Component{
 }
 
 export default Article;
+
+
+// <ul>
+//     {this.props.list.map(function(listValue){
+//       return <li>{listValue}</li>;
+//     })}
+// </ul>

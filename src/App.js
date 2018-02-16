@@ -1,32 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import Header from './Head/Header'
-import MyList from './Body/MyList'
+import Header from './Head/Header';
+import MyList from './Body/MyList';
+
 
 class App extends Component {
   constructor(props){
-    super(props)
-    this.state = {
-      myArticle : ['Apple Music Expands', 'Facebook Has New Lists Feature', 'Smartwatch for Kids'],
-      newArticle: '',
-      addArticleToList: ''
-    }
-    this.addArticle = this.addArticle.bind(this);
-    // this.loadArticles = this.loadArticles.bind(this);
-  }
-
-  // componentDidMount(){
-  //     this.loadArticles()
-  // }
-
-  addArticle (e) {
-    this.setState({
-      newArticle: e.target.value
-    })
-    this.setState(
-      {myArticle: [...this.state.myArticle, this.state.newArticle]}
-    )
-    console.log("my Article", this.state.myArticle);
+    super(props);
   }
 
   // loadArticles() {
@@ -40,8 +20,8 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header addArticle={(e) => this.addArticle(e)}/>
-        <MyList myArticle={this.state.myArticle}/>
+        <Header />
+        <MyList />
       </div>
     );
   }
