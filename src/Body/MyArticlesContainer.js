@@ -20,6 +20,41 @@ class MyArticlesContainer extends Component{
   //   console.log("reached", this.state.myArticles);
   // }
 
+  componentWillMount = () => {
+    $.ajax({
+      method: 'GET',
+      url: 'http://localhost:3001/api/articles'
+    })
+    .then((res)=>{
+      this.setState(
+        {
+          myArticles: res
+        }
+      )
+      this.loadArticlesFromServer()
+    }, (err) => {
+      console.log('Error: ', err);
+    })
+  }
+
+  loadArticlesFromServer = () => {
+    $.ajax({
+      method: 'GET',
+      url: 'http://localhost:3001/api/articles/'
+    })
+    .then((res) => {
+      this.setState(
+        {
+          myArticles: res
+        }
+      )
+    })
+  }
+
+  componentDidMount = () => {
+    this.loadArticlesFromServer()
+  }
+
   createArticle(e){
     $.ajax({
       method: 'POST',
@@ -48,11 +83,13 @@ class MyArticlesContainer extends Component{
           myArticles={this.state.myArticles}
         />
 
+        <MyList
+          myArticles={this.state.myArticles}
+          loadArticlesFromServer={(e)=>this.loadArticlesFromServer(e)}
+        />
+
       </div>
   )}
 }
 
 export default MyArticlesContainer;
-
-// <MyList
-// myArticles={this.state.myArticles}/>

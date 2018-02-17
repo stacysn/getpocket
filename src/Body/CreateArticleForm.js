@@ -44,7 +44,7 @@ class CreateArticleForm extends Component{
               value={this.state.myArticle}
             />
           </Label>
-          <Button type='submit' style={{padding: '0.1rem'}} onClick={(e)=> this.onFormSubmit(e)}> Submit </Button>
+          <Button type='submit' action='submit' style={{padding: '0.1rem'}} onClick={(e)=> this.onFormSubmit(e)}> Submit </Button>
         </FormGroup>
         <MyList myArticle={this.state.myArticle}
           myArticles={this.props.myArticles}

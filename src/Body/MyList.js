@@ -1,13 +1,31 @@
 import React, { Component } from 'react';
-import Article from './Article';
+// import Article from './Article';
 import '../App.css';
+import { Card, Row, Col, CardText, CardTitle, Button } from 'reactstrap';
+
 
 class MyList extends Component{
   render(){
-    return(
+    let myArticles = this.props.myArticles.map(article => {
+      return (
+        <div key={article._id}>
+
+        <Row>
+          <Col sm="6">
+            <Card body style={{backgroundColor: '#7E9181'}}>
+              <CardTitle>{this.props.myArticle}</CardTitle>
+              <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
+              <Button>Add Tag</Button>
+            </Card>
+          </Col>
+        </Row>
+
+        </div>
+      )
+    })
+    return (
       <div>
-        <h1> My Articles List </h1>
-        <Article myArticle={this.props.myArticle}/>
+        { myArticles }
       </div>
     )
   }
