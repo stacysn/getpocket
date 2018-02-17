@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import '../App.css';
 import { Button, FormGroup, Label, Input } from 'reactstrap';
+import MyList from './MyList';
+import Article from './Article'
+
 
 
 class CreateArticleForm extends Component{
@@ -24,8 +27,9 @@ class CreateArticleForm extends Component{
     let newArticle = this.state.myArticle
     this.props.createArticle(newArticle)
     this.setState({
-      myArticle: ''
+      myArticle: this.state.myArticle
     })
+    console.log("on form sumit, myArticle: ", this.state.myArticle);
   }
 
   render(){
@@ -42,6 +46,10 @@ class CreateArticleForm extends Component{
           </Label>
           <Button type='submit' style={{padding: '0.1rem'}} onClick={(e)=> this.onFormSubmit(e)}> Submit </Button>
         </FormGroup>
+        <MyList myArticle={this.state.myArticle}
+          myArticles={this.props.myArticles}
+        />
+
       </div>
   )}
 }

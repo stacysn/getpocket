@@ -12,13 +12,13 @@ class MyArticlesContainer extends Component{
     }
     this.createArticle = this.createArticle.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleArticleChange = this.handleArticleChange.bind(this);
+    // this.handleArticleChange = this.handleArticleChange.bind(this);
   }
 
-  handleArticleChange(e){
-    console.log("reached", this.state.myArticles);
-    this.setState({myArticles: e.target.value})
-  }
+  // handleArticleChange(e){
+  //   this.setState({myArticles: e.target.value})
+  //   console.log("reached", this.state.myArticles);
+  // }
 
   createArticle(e){
     $.ajax({
@@ -31,9 +31,9 @@ class MyArticlesContainer extends Component{
       let myArticles = this.state.myArticles;
       myArticles.push(res)
       this.setState({
-        myArticles: ['']
+         myArticles
       })
-      this.handleArticleChange(res)
+      console.log("my articles array", this.state.myArticles);
     }), (err) => {
       console.log('Error', err);
     }
@@ -44,12 +44,15 @@ class MyArticlesContainer extends Component{
     return (
       <div className='myArticlesContainer'>
         <CreateArticleForm
-          createArticle={(e)=>this.createArticle(e)}/>
-        <MyList
-          myArticles={this.state.myArticles}/>
+          createArticle={(e)=>this.createArticle(e)}
+          myArticles={this.state.myArticles}
+        />
 
       </div>
   )}
 }
 
 export default MyArticlesContainer;
+
+// <MyList
+// myArticles={this.state.myArticles}/>

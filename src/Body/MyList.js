@@ -4,10 +4,10 @@ import '../App.css';
 
 class MyList extends Component{
   render(){
-
     return(
       <div>
-        <h1> {this.testing} </h1>
+        <h1> My Articles List </h1>
+        <Article myArticle={this.props.myArticle}/>
       </div>
     )
   }
