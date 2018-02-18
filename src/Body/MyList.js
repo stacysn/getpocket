@@ -9,7 +9,6 @@ class MyList extends Component{
     let myArticles = this.props.myArticles.map(article => {
       return (
         <div key={article._id}>
-
         <Row>
           <Col sm="6">
             <Card body style={{backgroundColor: '#7E9181'}}>

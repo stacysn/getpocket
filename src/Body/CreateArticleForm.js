@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import '../App.css';
 import { Button, FormGroup, Label, Input } from 'reactstrap';
 import MyList from './MyList';
-import Article from './Article'
+import Article from './Article';
+import $ from 'jquery-ajax';
 
 
 
@@ -38,13 +39,13 @@ class CreateArticleForm extends Component{
         <FormGroup >
           <Label >
             <Input
-              onChange={(e) => this.onInputChange(e)}
               placeholder="Add New Article Title"
               type='text'
               value={this.state.myArticle}
+              onChange={(e) => this.onInputChange(e)}
             />
           </Label>
-          <Button type='submit' action='submit' style={{padding: '0.1rem'}} onClick={(e)=> this.onFormSubmit(e)}> Submit </Button>
+          <Button type='submit' style={{padding: '0.1rem'}} onClick={(e)=> this.props.createArticle(e)}> Submit </Button>
         </FormGroup>
         <MyList myArticle={this.state.myArticle}
           myArticles={this.props.myArticles}

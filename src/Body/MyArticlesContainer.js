@@ -8,17 +8,19 @@ class MyArticlesContainer extends Component{
   constructor(props){
     super(props)
     this.state = {
-      myArticles: []
+      myArticles: [],
+      title: 'test',
+      selectedArticleObj: {}
     }
     this.createArticle = this.createArticle.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
-    // this.handleArticleChange = this.handleArticleChange.bind(this);
+    this.handleArticleChange = this.handleArticleChange.bind(this);
   }
 
-  // handleArticleChange(e){
-  //   this.setState({myArticles: e.target.value})
-  //   console.log("reached", this.state.myArticles);
-  // }
+  handleArticleChange(e){
+    this.setState({myArticles: e.target.value})
+    console.log("reached", this.state.myArticles);
+  }
 
   componentWillMount = () => {
     $.ajax({
@@ -45,9 +47,14 @@ class MyArticlesContainer extends Component{
     .then((res) => {
       this.setState(
         {
-          myArticles: res
+          myArticles: res,
+          selectedArticleObj: res.slice(-1)[0]
         }
       )
+
+      console.log("length of res", res.length);
+      console.log("last object", res.slice(-1)[0]);
+      console.log("selectedArticleObj ", this.state.selectedArticleObj);
     })
   }
 
@@ -60,15 +67,14 @@ class MyArticlesContainer extends Component{
       method: 'POST',
       url: 'http://localhost:3001/api/articles',
       data: {
-        title: this.state.myArticles
+        title : this.state.title
       }
-    }).then(res=>{
-      let myArticles = this.state.myArticles;
-      myArticles.push(res)
+    }).then(res => {
+      this.loadArticlesFromServer();
       this.setState({
-         myArticles
+         title: ''
       })
-      console.log("my articles array", this.state.myArticles);
+      console.log("res", res );
     }), (err) => {
       console.log('Error', err);
     }
@@ -81,6 +87,8 @@ class MyArticlesContainer extends Component{
         <CreateArticleForm
           createArticle={(e)=>this.createArticle(e)}
           myArticles={this.state.myArticles}
+          title={this.state.title}
+          handleArticleChange={(e)=>this.handleArticleChange(e)}
         />
 
         <MyList
