@@ -6,7 +6,6 @@ import Article from './Article';
 import $ from 'jquery-ajax';
 
 
-
 class CreateArticleForm extends Component{
   constructor(props){
     super(props)
@@ -30,7 +29,7 @@ class CreateArticleForm extends Component{
     this.setState({
       myArticle: this.state.myArticle
     })
-    console.log("on form sumit, myArticle: ", this.state.myArticle);
+    console.log("on form submit, myArticle: ", this.state.myArticle);
   }
 
   render(){

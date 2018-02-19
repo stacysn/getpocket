@@ -91,10 +91,6 @@ class MyArticlesContainer extends Component{
           handleArticleChange={(e)=>this.handleArticleChange(e)}
         />
 
-        <MyList
-          myArticles={this.state.myArticles}
-          loadArticlesFromServer={(e)=>this.loadArticlesFromServer(e)}
-        />
 
       </div>
   )}
