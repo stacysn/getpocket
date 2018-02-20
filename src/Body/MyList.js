@@ -1,22 +1,29 @@
 import React, { Component } from 'react';
-import Article from './Article'
+// import Article from './Article';
+import '../App.css';
+import { Card, Row, Col, CardText, CardTitle, Button } from 'reactstrap';
 
 
 class MyList extends Component{
-  constructor(props){
-    super(props)
-    this.state = {
-      tags: ["tech", "coffee"]
-    }
-  }
-
   render(){
+    let myArticles = this.props.myArticles.map(article => {
+      return (
+        <div key={article._id}>
+        <Row>
+          <Col sm="6">
+            <Card body style={{backgroundColor: '#7E9181'}}>
+              <CardTitle>{article.title}</CardTitle>
+              <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
+              <Button>Add Tag</Button>
+            </Card>
+          </Col>
+        </Row>
+        </div>
+      )
+    })
     return (
-      <div className='myList-body'>
-        <h1> My List </h1>
-        <Article myArticle={this.props.myArticle[0]}/>
-        <Article myArticle={this.props.myArticle[1]}/>
-        <Article myArticle={this.props.myArticle[2]}/>
+      <div>
+        { myArticles }
       </div>
     )
   }

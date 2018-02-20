@@ -40,7 +40,6 @@ function update (req, res){
       console.log('Error updating article: ', err);
     }
     foundArticle.title = req.body.title
-    foundArticle.description = req.body.description
     foundArticle.save(function(err, savedArticle){
       if (err){
         console.log('Error saving updated article', err);

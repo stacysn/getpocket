@@ -1,35 +1,41 @@
-let db = require("./models");
+var db = require('./models');
 
-let articleList = [
-  {
-    title: 'Apple Music Expands',
-    description: 'more music, more competition'
-  },
-  {
-    title: 'Facebook Has New Lists Feature',
-    description: '',
-  },
-  {
-    title: 'Smartwatch for Kids',
-    description: 'can track their sleep and location'
-  }
-]
+var articleList = [];
 
+articleList.push({
+  title: "Apple Music Expands",
+  tags: [
+    {
+     title: "tech"
+    },
+    {
+      title: "apple"
+    }
+  ]
+});
 
-  db.Article.remove({}, function(err, removedArticles){
-    articleList.forEach(function (ele){
-      //create a Project in the DB post
-      let newArticle = {
-        title: ele.title,
-        description: ele.description,
+articleList.push({
+  title: "Facebook Has New List Feature",
+  tags: [
+    {
+      title: "tech"
+    },
+    {
+      title: "social media"
+    }
+  ]
+});
+
+//restart seed to clear database
+db.Article.remove({}, function(err, article) {
+  console.log('removed all articles');
+  db.Article.create(articleList, function(err, article) {
+      if (err) {
+        console.log('ERROR', err);
+        return;
       }
-      console.log('Each Article', newArticle);
-
-      db.Article.create(newArticle, function(err, savedArticle){
-        if (err){
-          console.log('Error saving seed article: ', err);
-        }
-        console.log('Saved seed article: ', savedArticle);
-      })
-    })
-  })
+      console.log("recreated ", article.length, " articles");
+      console.log("all articles: ", article);
+      process.exit();
+  });
+})
