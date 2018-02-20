@@ -10,7 +10,8 @@ class MyArticlesContainer extends Component{
       myArticles: [],
       title: '',
       selectedArticleObj: {},
-      newTitle: ''
+      newTitle: '',
+      tagModalIsOpen: false
     }
     this.handleArticleChange = this.handleArticleChange.bind(this);
   }
@@ -51,9 +52,12 @@ class MyArticlesContainer extends Component{
       )
       let newTitle = res.slice(-1)[0] //gets last input of res array
       this.setState({newTitle: newTitle})
-      console.log("length of res", res.length);
+      console.log("res", res);
       console.log("res: ", newTitle.title);
       console.log("new title input", newTitle);
+      console.log("tags", newTitle.tags[0].title);
+      console.log("myArticles: ", this.state.myArticles);
+      console.log("TAGs: ", this.state.myArticles[0].tags[0].title);
     }, (err) => {
       console.log('Error ', err);
     })
@@ -82,6 +86,12 @@ class MyArticlesContainer extends Component{
     }), (err) => {
       console.log('Error', err);
     }
+  }
+
+  toggleModal = () => {
+    this.setState({
+      tagModalIsOpen: !this.state.tagModalIsOpen
+    })
   }
 
 
