@@ -12,13 +12,12 @@ class MyList extends Component{
         <Row>
           <Col sm="6">
             <Card body style={{backgroundColor: '#7E9181'}}>
-              <CardTitle>{this.props.myArticle}</CardTitle>
+              <CardTitle>{article.title}</CardTitle>
               <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
               <Button>Add Tag</Button>
             </Card>
           </Col>
         </Row>
-
         </div>
       )
     })
@@ -31,16 +30,3 @@ class MyList extends Component{
 }
 
 export default MyList;
-// let myArticleArray = this.props.myArticles.map((article)=>{
-//   return(
-//     <h1>Hello there</h1>
-//   )
-// })
-// return(
-//   <div className="articles">
-//   {myArticleArray}
-//   </div>
-// )
-// <Article
-//   article={article}
-// />

@@ -2,24 +2,21 @@ import React, { Component } from 'react';
 import '../App.css';
 import $ from 'jquery';
 import CreateArticleForm from './CreateArticleForm';
-import MyList from './MyList'
 
 class MyArticlesContainer extends Component{
   constructor(props){
     super(props)
     this.state = {
       myArticles: [],
-      title: 'test',
-      selectedArticleObj: {}
+      title: '',
+      selectedArticleObj: {},
+      newTitle: ''
     }
-    this.createArticle = this.createArticle.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
     this.handleArticleChange = this.handleArticleChange.bind(this);
   }
 
   handleArticleChange(e){
-    this.setState({myArticles: e.target.value})
-    console.log("reached", this.state.myArticles);
+    this.setState({title: e.target.value})
   }
 
   componentWillMount = () => {
@@ -30,7 +27,8 @@ class MyArticlesContainer extends Component{
     .then((res)=>{
       this.setState(
         {
-          myArticles: res
+          myArticles: res,
+          selectedArticleObj: res[0]
         }
       )
       this.loadArticlesFromServer()
@@ -39,7 +37,7 @@ class MyArticlesContainer extends Component{
     })
   }
 
-  loadArticlesFromServer = () => {
+  loadArticlesFromServer = () => { //retrieves articles from db
     $.ajax({
       method: 'GET',
       url: 'http://localhost:3001/api/articles/'
@@ -51,10 +49,13 @@ class MyArticlesContainer extends Component{
           selectedArticleObj: res.slice(-1)[0]
         }
       )
-
+      let newTitle = res.slice(-1)[0] //gets last input of res array
+      this.setState({newTitle: newTitle})
       console.log("length of res", res.length);
-      console.log("last object", res.slice(-1)[0]);
-      console.log("selectedArticleObj ", this.state.selectedArticleObj);
+      console.log("res: ", newTitle.title);
+      console.log("new title input", newTitle);
+    }, (err) => {
+      console.log('Error ', err);
     })
   }
 
@@ -62,7 +63,9 @@ class MyArticlesContainer extends Component{
     this.loadArticlesFromServer()
   }
 
-  createArticle(e){
+  handleSubmit = (e) => {
+    // e.preventDefault()
+    console.log(this.state.selectedArticleObj._id);
     $.ajax({
       method: 'POST',
       url: 'http://localhost:3001/api/articles',
@@ -74,6 +77,7 @@ class MyArticlesContainer extends Component{
       this.setState({
          title: ''
       })
+      this.handleArticleChange()
       console.log("res", res );
     }), (err) => {
       console.log('Error', err);
@@ -85,10 +89,12 @@ class MyArticlesContainer extends Component{
     return (
       <div className='myArticlesContainer'>
         <CreateArticleForm
-          createArticle={(e)=>this.createArticle(e)}
           myArticles={this.state.myArticles}
-          title={this.state.title}
           handleArticleChange={(e)=>this.handleArticleChange(e)}
+          selectedArticleObj={this.state.selectedArticleObj}
+          loadArticlesFromServer={(e)=>this.loadArticlesFromServer(e)}
+          handleSubmit={(e)=>this.handleSubmit(e)}
+          newTitle={this.state.newTitle}
         />
 
 
