@@ -14,17 +14,6 @@ class CreateArticleForm extends Component{
   }
 
 
-  // onFormSubmit (e) {
-  //   // e.preventDefault()
-  //   let newArticle = this.state.myArticle
-  //   this.props.handleSubmit(newArticle)
-  //   this.setState({
-  //     myArticle: e.target.value
-  //   })
-  // }
-
-
-
   render(){
     return (
       <div className='createForm articleForm'>
