@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../App.css';
 import $ from 'jquery';
 import CreateArticleForm from './CreateArticleForm';
+import PostTagModal from './PostTagModal';
 
 class MyArticlesContainer extends Component{
   constructor(props){
@@ -11,7 +12,7 @@ class MyArticlesContainer extends Component{
       title: '',
       selectedArticleObj: {},
       newTitle: '',
-      tagModalIsOpen: false
+      tag: ''
     }
     this.handleArticleChange = this.handleArticleChange.bind(this);
   }
@@ -74,12 +75,14 @@ class MyArticlesContainer extends Component{
       method: 'POST',
       url: 'http://localhost:3001/api/articles',
       data: {
-        title : this.state.title
+        title : this.state.title,
+        tag: this.state.tag
       }
     }).then(res => {
       this.loadArticlesFromServer();
       this.setState({
-         title: ''
+         title: '',
+         tag: ''
       })
       this.handleArticleChange()
       console.log("res", res );
@@ -88,12 +91,22 @@ class MyArticlesContainer extends Component{
     }
   }
 
-  toggleModal = () => {
-    this.setState({
-      tagModalIsOpen: !this.state.tagModalIsOpen
+  handleTagSubmit = (event) => {
+    event.preventDefault()
+    $.ajax({
+      method: "POST",
+      url: "https://localhost:3001/articles/",
+      data: {
+        tag: this.state.tag,
+      }
+    })
+    .then((res) => {
+      this.setState({tag: ''})
+    },
+    (err) => {
+      console.log("error: ", err);
     })
   }
-
 
   render(){
     return (
@@ -105,9 +118,9 @@ class MyArticlesContainer extends Component{
           loadArticlesFromServer={(e)=>this.loadArticlesFromServer(e)}
           handleSubmit={(e)=>this.handleSubmit(e)}
           newTitle={this.state.newTitle}
+          title={this.state.title}
+          handleTagSubmit={(e)=>this.handleTagSubmit(e)}
         />
-
-
       </div>
   )}
 }
