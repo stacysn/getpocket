@@ -24,7 +24,7 @@ function show (req, res) {
 function create (req, res) {
   db.Article.findById(req.params.article_id, function(err, foundArticle){
     let newTag = new db.Tag({
-      title: req.body.title
+      tagTitle: req.body.tagTitle
     })
     foundArticle.tags.push(newTag);
     foundArticle.save(function(err, savedArticle){

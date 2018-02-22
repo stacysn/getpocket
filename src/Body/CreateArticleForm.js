@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import '../App.css';
 import { Button, FormGroup, Label, Input, Form } from 'reactstrap';
 import MyList from './MyList';
-import PostTagModal from './PostTagModal'
 
 
 class CreateArticleForm extends Component{
@@ -34,10 +33,10 @@ class CreateArticleForm extends Component{
       </Form>
 
       <MyList
-        myArticle={this.state.myArticle}
         myArticles={this.props.myArticles}
         title={this.props.newTitle}
-        handleTagSubmit={(e)=>this.props.handleTagSubmit(e)}
+        handleTagChange={(e)=>this.props.handleTagChange(e)}
+        article_id={this.props.article_id}
       />
     </div>
   )}

@@ -1,17 +1,21 @@
 
 import React from 'react';
 import { Form, FormGroup, Label, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import $ from 'jquery';
 
 class PostTagModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
-      closeAll: false
+      closeAll: false,
+      tag:'',
+      tagTitle: ''
     };
 
     this.toggle = this.toggle.bind(this);
     this.toggleAll = this.toggleAll.bind(this);
+    this.handleTagChange = this.handleTagChange.bind(this);
   }
 
   toggle() {
@@ -26,25 +30,56 @@ class PostTagModal extends React.Component {
     });
   }
 
+  handleTagChange(e){
+    this.setState({tagTitle: e.target.value})
+  }
+
+
+  handleTagSubmit = (e) => {
+    e.preventDefault()
+
+   console.log("ARTICLE ID: ",this.props.articleId);
+   console.log("new tag value: ", this.state.tag);
+    $.ajax({
+      method: "POST",
+      url: 'http://localhost:3001/api/articles/' + this.props.articleId + '/tags/',
+      data: {
+        tagTitle: this.state.tagTitle
+      }
+    })
+    .then((res) => {
+      console.log("THIS.STATE.TAG", this.state.tagTitle);
+      this.props.loadArticlesFromServer();
+      this.setState({
+        tagTitle: ''
+      })
+      this.handleTagChange()
+    },
+    (err) => {
+      console.log("post to /api/articles/:article_id/tags resulted in error: ", err);
+    })
+    this.toggle()
+  }
+
   render() {
 
     return (
-      <div>
-        <Button onClick={this.toggle}>Add Tag</Button>
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>Add Tag to : {this.props.articleTitle}</ModalHeader>
+      <div className='tag-modal'>
+        <Button onClick={this.toggle} className='tag-modal'>Add Tag</Button>
+        <Modal isOpen={this.state.modal} toggle={this.toggle} className='tag-modal'>
+          <ModalHeader toggle={this.toggle} key={this.props.articleTitle._id}>Add Tag to : {this.props.articleTitle}{this.props.articleId}</ModalHeader>
           <ModalBody>
-            Add a tag for this article to make searching easier.
+            Add a tag for "{this.props.articleTitle}" article to make searching easier.
             <br />
             <Form>
               <FormGroup>
               <Label>
                 <Input
-                  type=''
-                  name=''
+                  type='text'
+                  name='text'
                   id='tag'
-                  value={this.props.tag}
-                  onChange={this.props.handleTagSubmit}
+                  value={this.tagTitle}
+                  onChange={this.handleTagChange}
                   placeholder="Add Tag Here"
                 />
               </Label>
@@ -52,7 +87,7 @@ class PostTagModal extends React.Component {
             </Form>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>Submit New Tag</Button>{' '}
+            <Button color="primary" onClick={this.handleTagSubmit} >Submit New Tag</Button>{' '}
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
         </Modal>

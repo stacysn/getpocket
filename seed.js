@@ -6,10 +6,10 @@ articleList.push({
   title: "Apple Music Expands",
   tags: [
     {
-     title: "tech"
+     tagTitle: "tech"
     },
     {
-      title: "apple"
+      tagTitle: "apple"
     }
   ]
 });
@@ -18,10 +18,10 @@ articleList.push({
   title: "Facebook Has New List Feature",
   tags: [
     {
-      title: "tech"
+      tagTitle: "tech"
     },
     {
-      title: "social media"
+      tagTitle: "social media"
     }
   ]
 });
