@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
-import { Card, Row, Col, CardText, CardTitle } from 'reactstrap';
+import { Card, Row, Col, CardText, CardTitle, Container } from 'reactstrap';
 import PostTagModal from './PostTagModal'
 import Tag from './Tag'
 
@@ -23,16 +23,16 @@ class MyList extends Component{
         let dis = this
         return (
           <div key={article._id}>
-            <Row className='individualArticle' id={article._id}>
-              <Col sm="6">
+            <Row id={article._id}>
+              <Col>
                 <Card body key={article._id} style={{backgroundColor: '#7E9181'}}>
                 <CardTitle id={article._id}>{article.title}</CardTitle>
                 <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                  <div className='individualArticle' id={article._id}>
+                  <div className='eachArticle' id={article._id}>
                     <ul>
                       {article.tags.map(function(tag){
                         return (
-                          <div key={tag._id}> 
+                          <div key={tag._id}>
                             <Tag tagTitle={tag.tagTitle} articleId={article._id} tagId={tag._id} loadArticlesFromServer={()=>dis.props.loadArticlesFromServer()}/>
                           </div>
                         )

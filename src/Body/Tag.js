@@ -20,8 +20,8 @@ class Tag extends Component{
 
  render(){
    return (
-     <div>
-      #{this.props.tagTitle} <Button onClick={(e)=>this.handleDeleteTag(e)}>X</Button>
+     <div className='tag'>
+      #{this.props.tagTitle} <Button className='delete-btn' onClick={(e)=>this.handleDeleteTag(e)}>X</Button>
      </div>
    )
  }
