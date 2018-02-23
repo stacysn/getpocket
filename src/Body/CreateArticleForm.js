@@ -5,20 +5,11 @@ import MyList from './MyList';
 
 
 class CreateArticleForm extends Component{
-  constructor(props){
-    super(props)
-    this.state = {
-      myArticle: '',
-      myArticleArray : []
-    }
-  }
-
 
   render(){
     return (
       <div className='createForm articleForm'>
-
-      <Form inline >
+        <Form inline >
         <FormGroup>
           <Label for="article" hidden>Article</Label>
           <Input
@@ -32,15 +23,17 @@ class CreateArticleForm extends Component{
         </FormGroup>
         {' '}
         <Button onClick={this.props.handleSubmit}>Submit</Button>
-      </Form>
+        </Form>
 
-        <MyList myArticle={this.state.myArticle}
+        <MyList
           myArticles={this.props.myArticles}
           title={this.props.newTitle}
+          handleTagChange={(e)=>this.props.handleTagChange(e)}
+          article_id={this.props.article_id}
+          loadArticlesFromServer={()=>this.props.loadArticlesFromServer()}
         />
-
       </div>
-  )}
+    )}
 }
 
 export default CreateArticleForm;

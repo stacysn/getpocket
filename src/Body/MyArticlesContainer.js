@@ -8,9 +8,12 @@ class MyArticlesContainer extends Component{
     super(props)
     this.state = {
       myArticles: [],
+      article_id: '',
       title: '',
       selectedArticleObj: {},
-      newTitle: ''
+      newTitle: '',
+      tagTitle: '',
+      tags: ''
     }
     this.handleArticleChange = this.handleArticleChange.bind(this);
   }
@@ -18,6 +21,7 @@ class MyArticlesContainer extends Component{
   handleArticleChange(e){
     this.setState({title: e.target.value})
   }
+
 
   componentWillMount = () => {
     $.ajax({
@@ -51,9 +55,7 @@ class MyArticlesContainer extends Component{
       )
       let newTitle = res.slice(-1)[0] //gets last input of res array
       this.setState({newTitle: newTitle})
-      console.log("length of res", res.length);
-      console.log("res: ", newTitle.title);
-      console.log("new title input", newTitle);
+      this.setState({article_id: this.state.newTitle._id})
     }, (err) => {
       console.log('Error ', err);
     })
@@ -64,26 +66,25 @@ class MyArticlesContainer extends Component{
   }
 
   handleSubmit = (e) => {
-    // e.preventDefault()
-    console.log(this.state.selectedArticleObj._id);
+    e.preventDefault()
     $.ajax({
       method: 'POST',
       url: 'http://localhost:3001/api/articles',
       data: {
-        title : this.state.title
+        title : this.state.title,
+        tag: this.state.tags
       }
     }).then(res => {
       this.loadArticlesFromServer();
       this.setState({
-         title: ''
+         title: '',
+         tags: ''
       })
       this.handleArticleChange()
-      console.log("res", res );
     }), (err) => {
       console.log('Error', err);
     }
   }
-
 
   render(){
     return (
@@ -95,9 +96,10 @@ class MyArticlesContainer extends Component{
           loadArticlesFromServer={(e)=>this.loadArticlesFromServer(e)}
           handleSubmit={(e)=>this.handleSubmit(e)}
           newTitle={this.state.newTitle}
+          title={this.state.title}
+          article_id={this.state.article_id}
+          loadArticlesFromServer={()=>this.loadArticlesFromServer()}
         />
-
-
       </div>
   )}
 }
