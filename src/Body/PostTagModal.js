@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Form, FormGroup, Label, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import $ from 'jquery';
@@ -10,12 +9,17 @@ class PostTagModal extends React.Component {
       modal: false,
       closeAll: false,
       tag:'',
-      tagTitle: ''
+      tagTitle: '',
+      tagId: ''
     };
 
     this.toggle = this.toggle.bind(this);
     this.toggleAll = this.toggleAll.bind(this);
     this.handleTagChange = this.handleTagChange.bind(this);
+  }
+
+  componentWillMount(){
+    this.props.loadArticlesFromServer()
   }
 
   toggle() {
@@ -39,7 +43,6 @@ class PostTagModal extends React.Component {
     e.preventDefault()
 
    console.log("ARTICLE ID: ",this.props.articleId);
-   console.log("new tag value: ", this.state.tag);
     $.ajax({
       method: "POST",
       url: 'http://localhost:3001/api/articles/' + this.props.articleId + '/tags/',
@@ -48,7 +51,8 @@ class PostTagModal extends React.Component {
       }
     })
     .then((res) => {
-      console.log("THIS.STATE.TAG", this.state.tagTitle);
+      console.log("THIS.STATE.TAGTITLE", this.state.tagTitle);
+      this.setState({tagId: res._id})
       this.props.loadArticlesFromServer();
       this.setState({
         tagTitle: ''
@@ -67,7 +71,7 @@ class PostTagModal extends React.Component {
       <div className='tag-modal'>
         <Button onClick={this.toggle} className='tag-modal'>Add Tag</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className='tag-modal'>
-          <ModalHeader toggle={this.toggle} key={this.props.articleTitle._id}>Add Tag to : {this.props.articleTitle}{this.props.articleId}</ModalHeader>
+          <ModalHeader toggle={this.toggle} key={this.props.articleTitle._id}>Add Tag to : {this.props.articleTitle}</ModalHeader>
           <ModalBody>
             Add a tag for "{this.props.articleTitle}" article to make searching easier.
             <br />

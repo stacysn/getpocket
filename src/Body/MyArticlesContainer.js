@@ -99,21 +99,6 @@ class MyArticlesContainer extends Component{
     }
   }
 
-
-    // handleDeleteTag = (e) => {
-    //   e.preventDefault();
-    //   let tagId = $(e.target).closest('.individualArticle').data('article._id');
-    //   console.log('trying to delete tag with id', tagId);
-    //   $.ajax({
-    //     method: 'DELETE',
-    //     url: 'http://localhost:3001/api/articles/' + this.state.newTitle._id + 'tags' + tagId
-    //     })
-    //   .then((res)=>{
-    //     console.log('deleted tag', res);
-    //     this.props.loadPostsFromServer();
-    //   })
-    // }
-
   render(){
     return (
       <div className='myArticlesContainer'>
@@ -133,4 +118,3 @@ class MyArticlesContainer extends Component{
 }
 
 export default MyArticlesContainer;
-// handleTagSubmit={(e)=>this.handleTagSubmit(e)}

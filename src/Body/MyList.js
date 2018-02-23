@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
-import { Card, Row, Col, CardText, CardTitle } from 'reactstrap';
+import { Card, Row, Col, CardText, CardTitle, Button } from 'reactstrap';
 import PostTagModal from './PostTagModal'
 import $ from 'jquery';
 
@@ -8,43 +8,37 @@ import $ from 'jquery';
 class MyList extends Component{
    constructor(props){
      super(props)
-    //  this.state={
-    //    tag:'',
-    //    tagTitle: ''
-    //  }
+     this.state={
+       tag:'',
+       tagTitle: ''
+     }
    }
 
-  //  handleTagSubmit = (e) => {
-  //    e.preventDefault()
-  //    // let articleId = $(e.target).closest('.tag-modal').data('tag._id');
-  //   //  console.log("article Id hit?: ", articleId);
-  //    // console.log('testing testing to get title of article:', this.state.newTitle);
-  //    // this.setState({article_id: this.state.article_id})
-  //    // console.log("Hit at this article: ", this.state.article_id );//same as this.state.newTitle._id
-  //    $.ajax({
-  //      method: "POST",
-  //      url: 'http://localhost:3001/api/articles/' + this.articleId + '/tags/',
-  //      data: {
-  //        tagTitle: this.state.tagTitle
-  //      }
-  //    })
-  //    .then((res) => {
-  //      console.log("Res Tags", res);
-  //      this.loadArticlesFromServer();
-  //      this.setState({
-  //        tagTitle: ''
-  //      })
-  //      console.log("Id of article", this.state.newTitle._id);
-  //      this.props.handleTagChange()
-  //      console.log("Tag Array: ", );
-  //    },
-  //    (err) => {
-  //      console.log("post to /api/articles/:article_id/tags resulted in error: ", err);
-  //    })
-  //  }
+   componentWillMount(){
+     this.props.loadArticlesFromServer()
+   }
+
+   handleDeleteTag = (e) => {
+    //  e.preventDefault();
+    // console.log("HANDLE DELETE TAG", e);
+    // console.log("E", e);
+    // console.log("Using this: ", this.state.tag.tagTitle);
+    let tagID = $(e.target).closest('.tag._id').data('.tag._id');
+     console.log('deleting this tag: ', tagID);
+    // //  console.log('trying to delete tag with id', this.state.tagId);
+    //  $.ajax({
+    //    method: 'DELETE',
+    //    url: 'http://localhost:3001/api/articles/' + this.props.articleId + '/tags/' + this.state.tagId
+    //    })
+    //  .then((res)=>{
+    //    console.log('deleted tag', res);
+    //    this.props.loadPostsFromServer();
+    //  })
+   }
 
   render(){
       let myArticles = this.props.myArticles.map(article => {
+        let dis = this
         return (
           <div key={article._id}>
             <Row className='individualArticle' id={article._id}>
@@ -56,10 +50,13 @@ class MyList extends Component{
                     <ul>
                       {article.tags.map(function(tag){
                         return (
-                          <li key={tag._id}> {tag.tagTitle} </li>
+                          <div key={tag._id} className="individualTag">
+                            {tag.tagTitle} <Button onClick={(e)=>dis.handleDeleteTag(e)}>X</Button>
+                          </div>
                         )
                       })}
                     </ul>
+
                   </div>
                   <PostTagModal
                     articleTitle={article.title}

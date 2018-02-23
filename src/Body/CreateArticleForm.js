@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import '../App.css';
 import { Button, FormGroup, Label, Input, Form } from 'reactstrap';
 import MyList from './MyList';
+import $ from 'jquery';
+
 
 
 class CreateArticleForm extends Component{
@@ -9,9 +11,17 @@ class CreateArticleForm extends Component{
     super(props)
     this.state = {
       myArticle: '',
-      myArticleArray : []
+      myArticleArray : [],
+      articleID: ''
     }
   }
+
+  getArticleIdFromMyList = () => {
+    console.log("Got getArticleIdFromMyList");
+    console.log("tagid: ", this.tagid);
+
+  }
+
 
   render(){
     return (
@@ -37,6 +47,8 @@ class CreateArticleForm extends Component{
         title={this.props.newTitle}
         handleTagChange={(e)=>this.props.handleTagChange(e)}
         article_id={this.props.article_id}
+        loadArticlesFromServer={()=>this.props.loadArticlesFromServer()}
+        getArticleIdFromMyList={()=>this.getArticleIdFromMyList()}
       />
     </div>
   )}
