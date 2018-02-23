@@ -14,7 +14,6 @@ class PostTagModal extends React.Component {
     };
 
     this.toggle = this.toggle.bind(this);
-    this.toggleAll = this.toggleAll.bind(this);
     this.handleTagChange = this.handleTagChange.bind(this);
   }
 
@@ -23,16 +22,9 @@ class PostTagModal extends React.Component {
   }
 
   toggle() {
-    this.setState({
-      modal: !this.state.modal
-    });
+    this.setState({modal: !this.state.modal});
   }
 
-  toggleAll() {
-    this.setState({
-      closeAll: true
-    });
-  }
 
   handleTagChange(e){
     this.setState({tagTitle: e.target.value})
@@ -41,8 +33,6 @@ class PostTagModal extends React.Component {
 
   handleTagSubmit = (e) => {
     e.preventDefault()
-
-   console.log("ARTICLE ID: ",this.props.articleId);
     $.ajax({
       method: "POST",
       url: 'http://localhost:3001/api/articles/' + this.props.articleId + '/tags/',
@@ -51,7 +41,6 @@ class PostTagModal extends React.Component {
       }
     })
     .then((res) => {
-      console.log("THIS.STATE.TAGTITLE", this.state.tagTitle);
       this.setState({tagId: res._id})
       this.props.loadArticlesFromServer();
       this.setState({

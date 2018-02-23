@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
-import { Card, Row, Col, CardText, CardTitle, Button } from 'reactstrap';
+import { Card, Row, Col, CardText, CardTitle } from 'reactstrap';
 import PostTagModal from './PostTagModal'
-import $ from 'jquery';
 import Tag from './Tag'
 
 
@@ -19,24 +18,6 @@ class MyList extends Component{
      this.props.loadArticlesFromServer()
    }
 
-  //  handleDeleteTag = (e) => {
-  //   //  e.preventDefault();
-  //   // console.log("HANDLE DELETE TAG", e);
-  //   // console.log("E", e);
-  //   // console.log("Using this: ", this.state.tag.tagTitle);
-  //   let tagID = $(e.target).closest('.tag._id').data('.tag._id');
-  //    console.log('deleting this tag: ', tagID);
-  //   // //  console.log('trying to delete tag with id', this.state.tagId);
-  //   //  $.ajax({
-  //   //    method: 'DELETE',
-  //   //    url: 'http://localhost:3001/api/articles/' + this.props.articleId + '/tags/' + this.state.tagId
-  //   //    })
-  //   //  .then((res)=>{
-  //   //    console.log('deleted tag', res);
-  //   //    this.props.loadPostsFromServer();
-  //   //  })
-  //  }
-
   render(){
       let myArticles = this.props.myArticles.map(article => {
         let dis = this
@@ -51,7 +32,9 @@ class MyList extends Component{
                     <ul>
                       {article.tags.map(function(tag){
                         return (
-                          <Tag tagTitle={tag.tagTitle} articleId={article._id} tagId={tag._id} loadArticlesFromServer={()=>dis.props.loadArticlesFromServer()}/>
+                          <div key={tag._id}> 
+                            <Tag tagTitle={tag.tagTitle} articleId={article._id} tagId={tag._id} loadArticlesFromServer={()=>dis.props.loadArticlesFromServer()}/>
+                          </div>
                         )
                       })}
                     </ul>
