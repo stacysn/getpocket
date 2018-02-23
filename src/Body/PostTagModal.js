@@ -1,6 +1,8 @@
 import React from 'react';
 import { Form, FormGroup, Label, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import $ from 'jquery';
+import '../App.css';
+
 
 class PostTagModal extends React.Component {
   constructor(props) {
@@ -58,10 +60,10 @@ class PostTagModal extends React.Component {
 
     return (
       <div className='tag-modal'>
-        <Button onClick={this.toggle} className='tag-modal'>Add Tag</Button>
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className='tag-modal'>
-          <ModalHeader toggle={this.toggle} key={this.props.articleTitle._id}>Add Tag to : {this.props.articleTitle}</ModalHeader>
-          <ModalBody>
+        <Button onClick={this.toggle} className='tag-modal-btn'>Add Tag</Button>
+        <Modal isOpen={this.state.modal} toggle={this.toggle} className='tag-modal-form'>
+          <ModalHeader className='tag-modal-header' toggle={this.toggle} key={this.props.articleTitle._id}>Add Tag to : {this.props.articleTitle}</ModalHeader>
+          <ModalBody className='tag-modal-body'>
             Add a tag for "{this.props.articleTitle}" article to make searching easier.
             <br />
             <Form>
@@ -80,8 +82,8 @@ class PostTagModal extends React.Component {
             </Form>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.handleTagSubmit} >Submit New Tag</Button>{' '}
-            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+            <Button onClick={this.handleTagSubmit} >Submit New Tag</Button>{' '}
+            <Button onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
         </Modal>
       </div>

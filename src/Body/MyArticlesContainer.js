@@ -22,7 +22,6 @@ class MyArticlesContainer extends Component{
     this.setState({title: e.target.value})
   }
 
-
   componentWillMount = () => {
     $.ajax({
       method: 'GET',

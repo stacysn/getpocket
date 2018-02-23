@@ -2,11 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
 .App-header {
   background-color: #2E3532;
   height: 150px;
@@ -15,7 +10,8 @@
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-size: 3.5em;
+  font-family: 'Playfair Display', serif;
 }
 
 .App-intro {
@@ -25,4 +21,34 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.myArticlesContainer {
+  background-color: #394053
+}
+
+.createForm {
+  margin: 0.2px;
+  font-family:'Playfair Display', serif;
+}
+
+.tag-modal-header {
+  background-color: #177E89
+}
+
+.tag-modal {
+  font-family:'Playfair Display', serif;
+}
+
+.tag{
+  padding-top: 0.15em;
+  padding-right: 0.9em;
+  padding-left: 0.9em;
+  font-size: 0.9em;
+  border-radius: 41.625em;
+  border-top-left-radius: 41.625em;
+  border-bottom-right-radius: 41.625em;
+  border-bottom-left-radius: 41.625em;
+  background-color: #177E89 ;
+  width: 125px
 }
